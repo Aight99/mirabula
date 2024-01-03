@@ -1,18 +1,26 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [Header("Уникальный Id места")]
+    [ShowOnly]
+    public string spotId;
+
+    private SpotsManager spotManager;
+
+
+    public void Init(string spotId)
     {
-        
+        this.spotId = spotId;
+        spotManager = GetIt.get<SpotsManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void StartHover() => spotManager.SetNewHoverSpot(spotId);
+
+    public void StopHover() => spotManager.ResetHoverSpot();
+
 }

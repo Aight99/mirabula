@@ -1,21 +1,18 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private string 
+    [Header("Id статистики")]
+    [ShowOnly]
+    public  string referenceId = Guid.NewGuid().ToString();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Уникальный Id карточки")]
+    [ShowOnly]
+    public  string cardId = Guid.NewGuid().ToString();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+
 }
