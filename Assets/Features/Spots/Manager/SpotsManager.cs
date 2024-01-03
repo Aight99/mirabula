@@ -34,7 +34,7 @@ public class SpotsManager : MonoBehaviour
     private Spot[] spots;
 
 
-    private string? currentHoverSpotId;
+    private string currentHoverSpotId;
 
     private float spotHeight;
     private float spotWidth;
