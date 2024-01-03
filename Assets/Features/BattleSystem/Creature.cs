@@ -1,21 +1,40 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Collections.ObjectModel;
+using PlasticGui.Gluon.WorkspaceWindow.Views.IncomingChanges;
 
 namespace BattleSystem
 {
-    public class Creature
+    public struct CreaturePosition
     {
-        // List<IEffect> effects;
-        // string name;
-        // int health = 0;
-        // int maxHealth = 0;
+        public int spotIndex;
+        public bool isEnemy => spotIndex > 4;
+    }
 
-        // // TODO: Factory to init from SO/Json
-        // public Creature(string name)
-        // {
-        //     this.name = name;
-        // }
+    public struct CreatureInfo
+    {
+        public string assetId;
+        public string name;
+        public int health;
+        public int maxHealth;
+    }
+
+    public readonly struct Creature
+    {
+        public readonly ReadOnlyCollection<IEffect> effects;
+        public readonly CreatureInfo info;
+        public readonly CreaturePosition position;
+
+        public Creature
+        (
+            CreatureInfo info = new CreatureInfo(),
+            CreaturePosition position = new CreaturePosition(),
+            ReadOnlyCollection<IEffect> effects = null
+        )
+        {
+            this.info = info;
+            this.position = position;
+            this.effects = effects ?? new List<IEffect>().AsReadOnly();
+        }
 
         public void ApplyEffect(IEffect effect)
         {
