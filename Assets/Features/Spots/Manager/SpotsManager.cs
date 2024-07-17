@@ -53,8 +53,8 @@ public class SpotsManager : MonoBehaviour
 
         spots = new Spot[size.rowCount * size.colCount];
 
-        Vector3 leftBottomCorner = new Vector3(0 , 0, 0 );
-        
+        Vector3 leftBottomCorner = new Vector3(0, 0, 0);
+
         leftBottomCorner.x -= size.colCount * spotWidth + (size.colCount - 1) * padding.horizontalPading;
         leftBottomCorner.y -= size.rowCount * spotHeight + (size.rowCount - 1) * padding.verticapPading;
 
@@ -63,7 +63,7 @@ public class SpotsManager : MonoBehaviour
         leftBottomCorner.y = leftBottomCorner.y / 2;
 
         leftBottomCorner.x += spotWidth / 2;
-        leftBottomCorner.y += spotHeight / 2;   
+        leftBottomCorner.y += spotHeight / 2;
 
         Vector3 spotPoint = leftBottomCorner;
 
@@ -74,8 +74,8 @@ public class SpotsManager : MonoBehaviour
             {
 
                 Spot newSpot = Instantiate(spotPrefab, spotPoint, Quaternion.identity);
-                newSpot.Init((c + r * size.colCount ).ToString());
-                spots[c + r * size.colCount ] = newSpot;
+                newSpot.Init((c + r * size.colCount).ToString());
+                spots[c + r * size.colCount] = newSpot;
 
                 spotPoint.x += spotWidth + padding.horizontalPading;
 
@@ -83,7 +83,7 @@ public class SpotsManager : MonoBehaviour
             spotPoint.x = leftBottomCorner.x;
             spotPoint.y += spotHeight + padding.verticapPading;
         }
-        
+
     }
 
 
@@ -95,7 +95,7 @@ public class SpotsManager : MonoBehaviour
 
         Utils.Print($"New hover spot id: {newSpotId}");
 
-        currentHoverSpotId = newSpotId ;
+        currentHoverSpotId = newSpotId;
     }
 
     public void ResetHoverSpot()
@@ -104,7 +104,7 @@ public class SpotsManager : MonoBehaviour
         currentHoverSpotId = null;
     }
 
-    
+
 
 
 }

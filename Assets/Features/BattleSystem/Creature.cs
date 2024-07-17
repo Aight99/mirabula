@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using PlasticGui.Gluon.WorkspaceWindow.Views.IncomingChanges;
 
 namespace BattleSystem
 {
@@ -8,6 +7,11 @@ namespace BattleSystem
     {
         public int spotIndex;
         public bool isEnemy => spotIndex > 4;
+
+        public CreaturePosition(int spotIndex = 0)
+        {
+            this.spotIndex = spotIndex;
+        }
     }
 
     public struct CreatureInfo
@@ -16,6 +20,20 @@ namespace BattleSystem
         public string name;
         public int health;
         public int maxHealth;
+
+        public CreatureInfo
+        (
+            string assetId,
+            string name,
+            int health,
+            int maxHealth
+        )
+        {
+            this.assetId = assetId;
+            this.name = name;
+            this.health = health;
+            this.maxHealth = maxHealth;
+        }
     }
 
     public readonly struct Creature
@@ -40,5 +58,38 @@ namespace BattleSystem
         {
             effect.Transform(this);
         }
+
+        public static Creature Reduce(Creature creature)
+        {
+            var newInfo = creature.info;
+            var newPosition = creature.position;
+
+            EffectTrigger trigger = new OnApplyEffect();
+
+            switch (trigger)
+            {
+                case OnApplyEffect onApply:
+                    break;
+                case OnStartEffect onStart:
+                    break;
+            }
+
+            return new Creature(creature.info, creature.position, creature.effects);
+        }
+    }
+
+    public abstract class EffectTrigger
+    {
+
+    }
+
+    public class OnApplyEffect : EffectTrigger
+    {
+
+    }
+
+    public class OnStartEffect : EffectTrigger
+    {
+
     }
 }
