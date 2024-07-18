@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -20,7 +18,6 @@ public class Size
 
 public class SpotsManager : MonoBehaviour
 {
-
     [SerializeField]
     private Spot spotPrefab;
 
@@ -30,34 +27,32 @@ public class SpotsManager : MonoBehaviour
     [SerializeField]
     private Size size;
 
-
     private Spot[] spots;
-
 
     private string currentHoverSpotId;
 
     private float spotHeight;
     private float spotWidth;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("SpotManger Craete");
+        Debug.Log("SpotManger Created");
 
         GetIt.registerSingleton(this);
 
-        BoxCollider2D spotColider = spotPrefab.GetComponent<BoxCollider2D>();
+        BoxCollider2D spotCollider = spotPrefab.GetComponent<BoxCollider2D>();
 
-        spotHeight = spotColider.size.y;
-        spotWidth = spotColider.size.x;
+        spotHeight = spotCollider.size.y;
+        spotWidth = spotCollider.size.x;
 
         spots = new Spot[size.rowCount * size.colCount];
 
         Vector3 leftBottomCorner = new Vector3(0, 0, 0);
 
-        leftBottomCorner.x -= size.colCount * spotWidth + (size.colCount - 1) * padding.horizontalPading;
-        leftBottomCorner.y -= size.rowCount * spotHeight + (size.rowCount - 1) * padding.verticapPading;
-
+        leftBottomCorner.x -=
+            size.colCount * spotWidth + (size.colCount - 1) * padding.horizontalPading;
+        leftBottomCorner.y -=
+            size.rowCount * spotHeight + (size.rowCount - 1) * padding.verticapPading;
 
         leftBottomCorner.x = leftBottomCorner.x / 2;
         leftBottomCorner.y = leftBottomCorner.y / 2;
@@ -67,31 +62,25 @@ public class SpotsManager : MonoBehaviour
 
         Vector3 spotPoint = leftBottomCorner;
 
-
         for (int r = 0; r < size.rowCount; r += 1)
         {
             for (int c = 0; c < size.colCount; c += 1)
             {
-
                 Spot newSpot = Instantiate(spotPrefab, spotPoint, Quaternion.identity);
                 newSpot.Init((c + r * size.colCount).ToString());
                 spots[c + r * size.colCount] = newSpot;
 
                 spotPoint.x += spotWidth + padding.horizontalPading;
-
             }
             spotPoint.x = leftBottomCorner.x;
             spotPoint.y += spotHeight + padding.verticapPading;
         }
-
     }
-
 
     public void SetNewHoverSpot(string newSpotId)
     {
-
-        if (spots.Where((s) => s.spotId == newSpotId).Count() != 1) return;
-
+        if (spots.Where((s) => s.spotId == newSpotId).Count() != 1)
+            return;
 
         Utils.Print($"New hover spot id: {newSpotId}");
 
@@ -103,8 +92,4 @@ public class SpotsManager : MonoBehaviour
         Utils.Print($"Reset hover spot");
         currentHoverSpotId = null;
     }
-
-
-
-
 }

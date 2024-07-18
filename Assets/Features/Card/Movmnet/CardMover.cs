@@ -1,12 +1,10 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-
-public class CardMover : MonoBehaviour , IMover
+public class CardMover : MonoBehaviour, IMover
 {
-
     private Transform transformReference;
     private Tween moveTween;
 
@@ -17,7 +15,6 @@ public class CardMover : MonoBehaviour , IMover
     [Header("Задерэка анимации вращения в милисекундах")]
     [SerializeField]
     private int rotateDuration = 300;
-
 
     [SerializeField]
     private Vector2 basicRotaion = Vector2.zero;
@@ -31,12 +28,12 @@ public class CardMover : MonoBehaviour , IMover
     void Start()
     {
         transformReference = GetComponent<Transform>();
-
     }
 
     public void Move(Vector3 newPos)
     {
-        if (newPos == transformReference.position) return;
+        if (newPos == transformReference.position)
+            return;
 
         newPos.z = transformReference.position.z;
 
@@ -48,17 +45,22 @@ public class CardMover : MonoBehaviour , IMover
     {
         Vector2 diff = transform.position - newPos;
 
-
-        float ry = Mathf.Lerp(basicRotaion.x, maxAbsRotation.x, Mathf.Min(Mathf.Abs(diff.x) / speedMaxRotation, 1.0f));
-        float rx = Mathf.Lerp(basicRotaion.y, maxAbsRotation.y, Mathf.Min(Mathf.Abs(diff.y) / speedMaxRotation, 1.0f));
+        float ry = Mathf.Lerp(
+            basicRotaion.x,
+            maxAbsRotation.x,
+            Mathf.Min(Mathf.Abs(diff.x) / speedMaxRotation, 1.0f)
+        );
+        float rx = Mathf.Lerp(
+            basicRotaion.y,
+            maxAbsRotation.y,
+            Mathf.Min(Mathf.Abs(diff.y) / speedMaxRotation, 1.0f)
+        );
 
         ry *= diff.x > 0 ? 1 : -1;
         rx *= diff.y > 0 ? 1 : -1;
 
-
         Vector3 newRotation = new Vector3(rx, ry, 0);
         transform.eulerAngles = newRotation;
-
     }
 
     public void ResetRotation()
@@ -66,11 +68,7 @@ public class CardMover : MonoBehaviour , IMover
         transform.DORotate(Vector3.zero, rotateDuration / 1000);
     }
 
-    public void StartMoving()
-    {
-    }
+    public void StartMoving() { }
 
-    public void StopMoving()
-    {
-    }
+    public void StopMoving() { }
 }

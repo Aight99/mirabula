@@ -25,7 +25,6 @@ public static class ColorExtensions
     }
 }
 
-
 public static partial class Utils
 {
     public static void Print(string text, Color? colorNullable = null)

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MovmentManager : MonoBehaviour
+public class MovementManager : MonoBehaviour
 {
     [SerializeField]
     private LayerMask movementLayer;
@@ -11,23 +9,21 @@ public class MovmentManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("MovmentManager create");
+        Debug.Log("MovementManager Created");
     }
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+            SelectNewCard();
 
-
-        if (Input.GetMouseButtonDown(0)) SelectNewCard();
-
-        if (Input.GetMouseButtonUp(0)) DropSelectedCard();
+        if (Input.GetMouseButtonUp(0))
+            DropSelectedCard();
 
         Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         selectedMover?.Rotate(newPos);
         selectedMover?.Move(newPos);
-        
-
     }
 
     void DropSelectedCard()
@@ -40,9 +36,15 @@ public class MovmentManager : MonoBehaviour
     void SelectNewCard()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, movementLayer);
+        RaycastHit2D hit = Physics2D.Raycast(
+            ray.origin,
+            ray.direction,
+            Mathf.Infinity,
+            movementLayer
+        );
 
-        if (hit.collider == null) return;
+        if (hit.collider == null)
+            return;
 
         IMover hitMover;
         hit.collider.TryGetComponent(out hitMover);
@@ -51,6 +53,3 @@ public class MovmentManager : MonoBehaviour
         selectedMover?.StartMoving();
     }
 }
-
-
-

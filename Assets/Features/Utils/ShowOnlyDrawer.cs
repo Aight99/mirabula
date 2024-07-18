@@ -1,9 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class ShowOnlyAttribute : PropertyAttribute
-{
-}
+public class ShowOnlyAttribute : PropertyAttribute { }
 
 [CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
 public class ShowOnlyDrawer : PropertyDrawer

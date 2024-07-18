@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spot : MonoBehaviour
 {
-
     [Header("Уникальный Id места")]
     [ShowOnly]
     public string spotId;
 
     private SpotsManager spotManager;
-
 
     public void Init(string spotId)
     {
@@ -22,5 +17,4 @@ public class Spot : MonoBehaviour
     public void StartHover() => spotManager.SetNewHoverSpot(spotId);
 
     public void StopHover() => spotManager.ResetHoverSpot();
-
 }

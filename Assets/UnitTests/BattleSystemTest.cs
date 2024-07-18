@@ -1,14 +1,12 @@
-using NUnit.Framework;
-using BattleSystem;
 using System.Collections.Generic;
 using System.Linq;
+using BattleSystem;
+using NUnit.Framework;
 
 public class BattleSystemTest
 {
-    private static BattleStore GetPlainStore() => new BattleStore(GameState.Play, new List<Creature> {
-        new Creature(),
-        new Creature()
-    });
+    private static BattleStore GetPlainStore() =>
+        new BattleStore(GameState.Play, new List<Creature> { new Creature(), new Creature() });
 
     [Test]
     public void StoreAddCreature()
